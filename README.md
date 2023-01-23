@@ -10,6 +10,8 @@
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 [![Gitter][gitter-badge]][gitter-link]
 
+Run [on binder here](https://mybinder.org/v2/gh/henryiii/sqat-example/HEAD).
+
 <!-- prettier-ignore-start -->
 [actions-badge]:            https://github.com/henryiii/sqat-example/workflows/CI/badge.svg
 [actions-link]:             https://github.com/henryiii/sqat-example/actions

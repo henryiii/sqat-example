@@ -4,7 +4,7 @@ ci:
 
 repos:
   - repo: https://github.com/psf/black
-    rev: "23.3.0"
+    rev: "23.7.0"
     hooks:
       - id: black-jupyter
 
@@ -36,14 +36,14 @@ repos:
       - id: rst-inline-touching-normal
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v3.0.0"
+    rev: "v3.0.3"
     hooks:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
 
   - repo: https://github.com/asottile/blacken-docs
-    rev: "1.15.0"
+    rev: "1.16.0"
     hooks:
       - id: blacken-docs
         additional_dependencies: [black==22.8.0]
@@ -55,13 +55,13 @@ repos:
         args: ["-a", "from __future__ import annotations"] # Python 3.7+
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: "v3.9.0"
+    rev: "v3.10.1"
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
 
   - repo: https://github.com/hadialqattan/pycln
-    rev: "v2.1.5"
+    rev: "v2.2.2"
     hooks:
       - id: pycln
         additional_dependencies: [click<8.1]
@@ -78,14 +78,14 @@ repos:
           - flake8-print
 
   - repo: https://github.com/pycqa/flake8
-    rev: "6.0.0"
+    rev: "6.1.0"
     hooks:
       - id: flake8
         exclude: docs/conf.py
         additional_dependencies: *flake8_dependencies
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.4.1"
+    rev: "v1.5.1"
     hooks:
       - id: mypy
         files: src

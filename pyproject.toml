@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A great package."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 classifiers = [
   "Private :: Do Not Upload",
   "Development Status :: 1 - Planning",
@@ -21,11 +21,11 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -75,16 +75,13 @@ testpaths = [
 
 [tool.mypy]
 files = "src"
-python_version = "3.8"
+python_version = "3.9"
 warn_unused_configs = true
 strict = true
 show_error_codes = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
 
-
-[tool.ruff]
-src = ["src"]
 
 [tool.ruff.lint]
 extend-select = [
@@ -115,10 +112,6 @@ extend-ignore = [
   "PLR09",    # Too many <...>
   "ISC001",   # Conflicts with formatter
 ]
-unfixable = [
-  "T20",  # Removes print statements
-  "F841", # Removes unused variables
-]
 isort.required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.per-file-ignores]
@@ -126,7 +119,7 @@ isort.required-imports = ["from __future__ import annotations"]
 
 
 [tool.pylint]
-py-version = "3.8"
+py-version = "3.9"
 ignore-paths= ["src/sqat_example/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"

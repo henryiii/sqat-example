@@ -1,13 +1,17 @@
+#!/usr/bin/env -S uv run
+
+# /// script
+# dependencies = ["nox>=2025.2.9"]
+# ///
+
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 
 import nox
 
-DIR = Path(__file__).parent.resolve()
-
-nox.options.sessions = ["lint", "pylint", "tests"]
+nox.needs_version = ">=2025.2.9"
+nox.options.default_venv_backend = "uv|virtualenv"
 
 
 @nox.session
@@ -28,7 +32,7 @@ def pylint(session: nox.Session) -> None:
     """
     # This needs to be installed into the package environment, and is slower
     # than a pre-commit check
-    session.install(".", "pylint")
+    session.install("-e.", "pylint")
     session.run("pylint", "src", *session.posargs)
 
 
@@ -37,11 +41,11 @@ def tests(session: nox.Session) -> None:
     """
     Run the unit and regular tests.
     """
-    session.install(".[test]")
+    session.install("-e.", "--group=test")
     session.run("pytest", *session.posargs)
 
 
-@nox.session
+@nox.session(default=False)
 def coverage(session: nox.Session) -> None:
     """
     Run tests and compute coverage.
@@ -51,25 +55,22 @@ def coverage(session: nox.Session) -> None:
     tests(session)
 
 
-@nox.session(reuse_venv=True)
+@nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
-    Build the docs. Pass "--serve" to serve. Pass "-b linkcheck" to check links.
+    Build the docs. Pass "--non-interactive" to avoid serving. Pass "-b linkcheck" to check links.
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--serve", action="store_true", help="Serve after building")
     parser.add_argument(
         "-b", dest="builder", default="html", help="Build target (default: html)"
     )
     args, posargs = parser.parse_known_args(session.posargs)
 
-    if args.builder != "html" and args.serve:
-        session.error("Must not specify non-HTML builder with --serve")
+    serve = session.interactive and args.builder == "html"
+    extra_installs = ["sphinx-autobuild"] if serve else []
 
-    extra_installs = ["sphinx-autobuild"] if args.serve else []
-
-    session.install("-e.[docs]", *extra_installs)
+    session.install("--group=docs", *extra_installs)
     session.chdir("docs")
 
     if args.builder == "linkcheck":
@@ -87,13 +88,13 @@ def docs(session: nox.Session) -> None:
         *posargs,
     )
 
-    if args.serve:
+    if serve:
         session.run("sphinx-autobuild", *shared_args)
     else:
         session.run("sphinx-build", "--keep-going", *shared_args)
 
 
-@nox.session
+@nox.session(default=False)
 def build(session: nox.Session) -> None:
     """
     Build an SDist and wheel.
@@ -101,3 +102,7 @@ def build(session: nox.Session) -> None:
 
     session.install("build")
     session.run("python", "-m", "build")
+
+
+if __name__ == "__main__":
+    nox.main()

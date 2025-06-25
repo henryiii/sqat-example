@@ -17,9 +17,9 @@ Python on your system, skipping ones that are not installed. You can also run
 specific jobs:
 
 ```console
-$ nox -s lint  # Lint only
+$ nox -s lint   # Lint only
 $ nox -s tests  # Tests
-$ nox -s docs -- serve  # Build and serve the docs
+$ nox -s docs   # Build and serve the docs
 $ nox -s build  # Make an SDist and wheel
 ```
 
@@ -33,17 +33,11 @@ You can set up a development environment by running:
 ```bash
 python3 -m venv .venv
 source ./.venv/bin/activate
-pip install -v -e .[dev]
+pip install -e. --group=dev
 ```
 
-If you have the
-[Python Launcher for Unix](https://github.com/brettcannon/python-launcher), you
-can instead do:
-
-```bash
-py -m venv .venv
-py -m install -v -e .[dev]
-```
+If you have [uv](https://docs.astral.sh/uv/), you can skip this step, and
+instead prefix all commands with `uv run`.
 
 # Post setup
 
@@ -80,12 +74,6 @@ You can build the docs using:
 
 ```bash
 nox -s docs
-```
-
-You can see a preview with:
-
-```bash
-nox -s docs -- serve
 ```
 
 # Pre-commit

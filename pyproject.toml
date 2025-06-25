@@ -11,12 +11,13 @@ authors = [
 description = "A great package."
 readme = "README.md"
 requires-python = ">=3.9"
+license = "bsd-3-clause"
+license-files = ["LICENSE"]
 classifiers = [
   "Private :: Do Not Upload",
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: BSD License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
@@ -31,14 +32,20 @@ classifiers = [
 ]
 dynamic = ["version"]
 
-[project.optional-dependencies]
+[project.urls]
+Homepage = "https://github.com/henryiii/sqat-example"
+"Bug Tracker" = "https://github.com/henryiii/sqat-example/issues"
+Discussions = "https://github.com/henryiii/sqat-example/discussions"
+Changelog = "https://github.com/henryiii/sqat-example/releases"
+
+
+[dependency-groups]
 test = [
   "pytest >=6",
   "pytest-cov >=3",
 ]
 dev = [
-  "pytest >=6",
-  "pytest-cov >=3",
+  { include-group = "test" },
 ]
 docs = [
   "Sphinx>=4.0",
@@ -47,19 +54,9 @@ docs = [
   "sphinx_copybutton",
 ]
 
-[project.urls]
-Homepage = "https://github.com/henryiii/sqat-example"
-"Bug Tracker" = "https://github.com/henryiii/sqat-example/issues"
-Discussions = "https://github.com/henryiii/sqat-example/discussions"
-Changelog = "https://github.com/henryiii/sqat-example/releases"
-
 
 [tool.hatch]
 version.path = "src/sqat_example/__init__.py"
-envs.default.dependencies = [
-  "pytest",
-  "pytest-cov",
-]
 
 
 [tool.pytest.ini_options]
@@ -78,7 +75,6 @@ files = "src"
 python_version = "3.9"
 warn_unused_configs = true
 strict = true
-show_error_codes = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
 
@@ -108,9 +104,8 @@ extend-select = [
   "NPY",         # NumPy specific rules
   "PD",          # pandas-vet
 ]
-extend-ignore = [
+ignore = [
   "PLR09",    # Too many <...>
-  "ISC001",   # Conflicts with formatter
 ]
 isort.required-imports = ["from __future__ import annotations"]
 

@@ -1,3 +1,6 @@
 python -m pip install uv
 uv pip install --system --upgrade -e. --group dev
-uv pip install --system pipx pre-commit nox ruff
+uv tool install pipx
+uv tool install nox
+uv tool install ruff
+uv tool install --with pre-commit-uv pre-commit

@@ -43,7 +43,7 @@ repos:
     rev: v0.14.11
     hooks:
       - id: ruff
-        args: ["--fix", "--show-fixes"]
+        args: ["--fix"]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -57,6 +57,11 @@ repos:
     rev: v2.4.1
     hooks:
       - id: codespell
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.42.0
+    hooks:
+      - id: typos
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: "v0.11.0.1"

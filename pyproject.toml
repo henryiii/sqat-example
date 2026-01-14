@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A great package."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "bsd-3-clause"
 license-files = ["LICENSE"]
 classifiers = [
@@ -22,11 +22,11 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -41,16 +41,16 @@ Changelog = "https://github.com/henryiii/sqat-example/releases"
 
 [dependency-groups]
 test = [
-  "pytest >=6",
+  "pytest >=9",
   "pytest-cov >=3",
 ]
 dev = [
   { include-group = "test" },
 ]
 docs = [
-  "Sphinx>=4.0",
-  "myst_parser>=0.13",
-  "sphinx-book-theme>=0.1.0",
+  "Sphinx>=7.0",
+  "myst_parser>=3.0",
+  "sphinx-book-theme>=1.0",
   "sphinx_copybutton",
 ]
 
@@ -59,10 +59,10 @@ docs = [
 version.path = "src/sqat_example/__init__.py"
 
 
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
-xfail_strict = true
+[tool.pytest]
+minversion = "9.0"
+addopts = ["-ra", "--showlocals"]
+strict = true
 filterwarnings = ["error"]
 log_level = "INFO"
 testpaths = [
@@ -72,12 +72,15 @@ testpaths = [
 
 [tool.mypy]
 files = "src"
-python_version = "3.9"
+python_version = "3.10"
 warn_unused_configs = true
 strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
 
+
+[tool.ruff]
+show-fixes = true
 
 [tool.ruff.lint]
 extend-select = [
@@ -114,7 +117,7 @@ isort.required-imports = ["from __future__ import annotations"]
 
 
 [tool.pylint]
-py-version = "3.9"
+py-version = "3.10"
 ignore-paths= ["src/sqat_example/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"

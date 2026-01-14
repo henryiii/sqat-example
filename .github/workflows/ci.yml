@@ -87,3 +87,17 @@ jobs:
 
       - name: Check products
         run: pipx run twine check dist/*
+
+
+  pass:
+    name: All pass
+    if: always()
+    needs: [pre-commit, checks, dist]
+
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

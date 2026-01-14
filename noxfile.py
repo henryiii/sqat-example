@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run
+#!/usr/bin/env -S uv run --script
 
 # /// script
 # dependencies = ["nox>=2025.2.9"]
@@ -19,9 +19,9 @@ def lint(session: nox.Session) -> None:
     """
     Run the linter.
     """
-    session.install("pre-commit")
+    session.install("prek")
     session.run(
-        "pre-commit", "run", "--all-files", "--show-diff-on-failure", *session.posargs
+        "prek", "run", "--all-files", "--show-diff-on-failure", *session.posargs
     )
 
 
